@@ -103,7 +103,7 @@ public class DocumentStorageServiceImpl implements DocumentStorageService {
         }
     }
 
-    public void updateDoc(String docId, String newData) throws DocumentStorageException {
+    public void updateDoc(String docId, MultipartFile document) throws DocumentStorageException {
         Document doc = docMap.get(docId);
         if(doc == null){
             throw new DocumentStorageException("Document not found "+ docId);
@@ -114,8 +114,8 @@ public class DocumentStorageServiceImpl implements DocumentStorageService {
         try {
             Path targetLocation = this.docStorageLocation.resolve(fileName);
             System.out.println("Document location is " + targetLocation);
-            Files.write(targetLocation, newData.getBytes(), StandardOpenOption.WRITE);
-           // Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+          //  Files.write(targetLocation, newData.getBytes(), StandardOpenOption.WRITE);
+            Files.copy(document.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
         } catch (IOException ex) {
             throw new DocumentStorageException("Could not update the document " + fileName + ". Please try again!", ex);

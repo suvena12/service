@@ -11,7 +11,7 @@ public interface DocumentStorageService {
 
     public Resource loadDoc(String docId) throws DocumentStorageException;
 
-    public void updateDoc(String docId, String newData) throws DocumentStorageException;
+    public void updateDoc(String docId, MultipartFile doc) throws DocumentStorageException;
 
     public void deleteDoc(String docId) throws DocumentStorageException;
 

@@ -41,9 +41,9 @@ public class DocumentStorageRestController {
     }
 
     @PutMapping("/documents/{id}")
-    public ResponseEntity updateDoc(@PathVariable String id, String newData){
+    public ResponseEntity updateDoc(@PathVariable String id, @RequestParam("file") MultipartFile file){
         try {
-            docSer.updateDoc(id, newData);
+            docSer.updateDoc(id, file);
         }  catch (DocumentStorageException ex){
             new ResponseEntity(HttpStatus.NOT_FOUND);
         }
